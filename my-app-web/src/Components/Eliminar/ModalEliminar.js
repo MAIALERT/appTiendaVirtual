@@ -44,10 +44,7 @@ const Eliminar = (args) => {
             <Media>
               <Media.Item>
                 <Content>
-                  <p>
-                    <br />
                     <ProEliminar/>
-                  </p>
                 </Content>
               </Media.Item>
             </Media>

@@ -36,7 +36,6 @@ export default class Roles extends Component {
     return (
       <div className="py-4">
         <Container>
-        {/* Tabla listar roles */}
         <h2 className="py-3">Listado de Roles</h2>
           <Table striped bordered hover className="card-body">
             <thead>
