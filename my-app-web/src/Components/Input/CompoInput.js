@@ -4,8 +4,9 @@ export default class CompoInput extends Component {
     render() {
         return (
             <div>
-                <Form.Control type="text" placeholder="Ingrese lo Solicitado"/>
-                {/* <Form.Control type="text">{this.props.titulo}</Form.Control> */}
+
+                <Form.Control type="text" placeholder="Ingresa lo Solicitado">{this.props.onchange}</Form.Control>
+                {/* <input className="form-control" type="text">{this.props.onChange}</input> */}
               
             </div>
         )
