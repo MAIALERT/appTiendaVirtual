@@ -1,21 +1,15 @@
-import React, { useState } from "react";
-//import axios from "axios";
+import React, {useState} from "react";
 import 'bulma/css/bulma.min.css';
-import { Button } from 'react-bulma-components';
-// import { ButtonGroup } from 'react-bulma-components';
-// import { ModalCard } from 'react-bulma-components';
-// import { ModalCardHead } from 'react-bulma-components';
-// import { ModalCardTitle } from 'react-bulma-components';
-// import { ModalCardBody } from 'react-bulma-components';
-import { Modal } from 'react-bulma-components';
-import { Media } from 'react-bulma-components';
-// import { MediaItem } from 'react-bulma-components';
-//import { Image } from 'react-bulma-components';
-import { Content } from 'react-bulma-components';
+import {Button} from 'react-bulma-components';
+import {Modal} from 'react-bulma-components';
+import {Media} from 'react-bulma-components';
+import {Content} from 'react-bulma-components';
 import ProEliminar from './Eliminar';
-// import { ModalCardFoot } from 'react-bulma-components';
 
-const Eliminar = (args) => {  
+
+
+
+const Eliminar = () => {  
   const [openModal, setOpenModal] = useState();
   return (
     <>
@@ -30,7 +24,6 @@ const Eliminar = (args) => {
         </Button>
       </Button.Group>
       <Modal  
-        {...args}
         show={openModal === 'card'}
         onClose={() => {
           return setOpenModal();
@@ -44,7 +37,7 @@ const Eliminar = (args) => {
             <Media>
               <Media.Item>
                 <Content>
-                    <ProEliminar/>
+                 <ProEliminar/>
                 </Content>
               </Media.Item>
             </Media>
@@ -54,6 +47,8 @@ const Eliminar = (args) => {
         </Modal.Card>
       </Modal>
     </>);
+ 
   }
 
   export default Eliminar;
+

@@ -1,36 +1,32 @@
-import React, { Component } from "react";
-import axios from "axios";
+import React, { Component } from "react";//Exportando los componentes de react
+import axios from "axios";//Exportando axios
 import Table from "react-bootstrap/Table";
 import Container from "react-bootstrap/Container";
 import Button from 'react-bootstrap/Button'
-
 
 export default class Roles extends Component {
   
   state = {
     roles: [],
-    nombre: '',
-    descripcion: '',
   };
 
   async componentDidMount(){
     this.getRol();
-    console.log(this.state.roles);
   }
-
+  
+  //Mostrar los roles()
   getRol =  async () => {
     const res = await axios.get("http://localhost:4000/roles");
     this.setState({ roles: res.data.datos });
   }
 
   //PROCESO DE ELIMINACION
-  eliminarRol = async (id) =>{
-      //console.log(id);
-      await axios.delete('http://localhost:4000/roles/' + id)
-      this.getRol();
+  eliminarRol = async (id) => {
+    await axios.delete('http://localhost:4000/roles/' + id)
+    this.getRol();
+   //console.log(id);
+
   }
-
-
   render() {
    //const hola='hola';
     return (
@@ -52,7 +48,7 @@ export default class Roles extends Component {
                   <td>{rol.id}</td>
                   <td>{rol.nombre}</td>
                   <td>{rol.descripcion}</td>
-                   <td> <Button variant="danger" type="submit" onClick={() => this.eliminarRol(rol.id)}>Eliminar</Button></td> 
+                   <td> <Button variant="danger" type="submit" onClick= {() => this.eliminarRol(rol.id)}>Eliminar</Button></td> 
                 </tr>
               ))}
             </tbody>
