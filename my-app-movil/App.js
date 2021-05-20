@@ -4,8 +4,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 //import logoPrincipal from "./assets/imgLogo.png";
-import logoPrincipal from "./assets/images/imgOtros/logoPrincipal.png";
-import home from './Home';
+import logoPrincipal from './assets/images/imgOtros/logoPrincipal.png';
+import home from './Components/Home';
+import Labios from './Components/Labios';
 
 
 function HomeScreen({ navigation }) {
@@ -31,8 +32,9 @@ function App() {
     
     <NavigationContainer>
       <Stack.Navigator initialRouteName="-Crystal-">
-        <Stack.Screen name="-Crystal-" component={HomeScreen} />
+      <Stack.Screen name="-Crystal-" component={HomeScreen} options={{headerShown: false}}/>
         <Stack.Screen name="Home" component={home} />
+        {/* <Stack.Screen name="Labios" component={Labios} /> */}
       </Stack.Navigator>
     </NavigationContainer>
   
@@ -44,7 +46,7 @@ export default App;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000',
+    backgroundColor: "#000",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -61,7 +63,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
   },
   navegacion: { 
-    color: '#fff',
+    color: "#fff",
 
   },
 });
