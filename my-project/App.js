@@ -1,9 +1,11 @@
-
 import React, {useState} from 'react';
+import axios from "axios";
 import { StyleSheet, View} from 'react-native';
 import { Input, Button, Icon, Text} from 'react-native-elements';
 
 export default function App() {
+
+  
   //PASO 2
   /*Aqui vamos a crear un estado donde vamos a 
   guardar la data del formulario.(Objeto)*/
@@ -15,7 +17,6 @@ export default function App() {
   /*initialState => Aqui le vamos a decir a este estado 
   que cuando arranque me inicie con una funcion que en este 
   caso es "defaulFormValues()"
-
 
 
    //PASO 5
@@ -33,7 +34,7 @@ export default function App() {
     
      [type] => Dinamico quiren decir los corchetes
     */
-    setFormData({ ...formData, [type]: e.nativeEvent.text})
+   setFormData({ ...formData, [type]: e.nativeEvent.text})
 
   }
 
@@ -44,9 +45,29 @@ export default function App() {
    campo que cambio "nombre" lo que va hacer es que el [type] 
    tomo lo que se digite
   */
+
+  //PASO7 REGISTRO
+  const registerRol = async () => {
+    const result = {
+      statusResponse: true,
+      error: null
+    }
+    
+    const a = await axios.post('http://192.168.0.103:4000/roles', {
+      nombre: formData.nombre,
+      descripcion: formData.descripcion,
+    })
+
+    if (result.statusResponse) {
+      return (result.error)
+    }
+  }
+
   return (
   //PASO 1
     <View styles={styles.container}>
+  
+
       <Text></Text> 
       <Text></Text> 
       <Text>Registro Rol</Text> 
@@ -80,7 +101,8 @@ export default function App() {
         title="Registrar"
         containerStyle={styles.btnContainer}
         buttonStyle={styles.btn}
-        onPress={() => console.log(formData)}
+        //onPress={() => console.log(formData)}
+        onPress={() => registerRol()}
       />
     </View>
   );
@@ -88,7 +110,7 @@ export default function App() {
    //PASO 3
   /* Esta constante tipo flecha nos va a devolver los valores del formulario*/
   const defaulFormValues = () => {
-    return{ nombre: "",descripcion: ""}
+    return { nombre: "",descripcion: ""}
   }
 
 const styles = StyleSheet.create({
@@ -114,3 +136,5 @@ const styles = StyleSheet.create({
       color: "#90EE90"
   }
 });
+
+

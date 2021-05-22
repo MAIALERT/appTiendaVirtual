@@ -26,8 +26,6 @@ export default class Roles extends Component {
     console.log(this.state.roles);
   }
 
-
-
  
   onChangeRolNombre = (e) => {
     this.setState({
