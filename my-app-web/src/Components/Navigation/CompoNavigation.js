@@ -20,7 +20,6 @@ export default class CompoNavigation extends Component {
                 <Nav.Link href="/">Inicio</Nav.Link>
                 <NavDropdown title="Usuario" id="basic-nav-dropdown">
                   <NavDropdown.Item href="/roles">Rol</NavDropdown.Item> 
-                  <NavDropdown.Item href="/Eliminar">Eliminar</NavDropdown.Item> 
                   {/* <Link className= "nav-link "to= "/roles">Rol</Link>  */}
                   <NavDropdown.Item href="/personas">Persona</NavDropdown.Item> 
                   <NavDropdown.Item href="/Usuarios">Usuario</NavDropdown.Item>

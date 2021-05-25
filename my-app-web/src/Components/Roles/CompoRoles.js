@@ -3,15 +3,9 @@ import axios from "axios";
 import Table from "react-bootstrap/Table";
 import Container from "react-bootstrap/Container";
 import Form from 'react-bootstrap/Form';
-//import CompoInput from '../Input/CompoInput';
 import CompoLabel from '../Label/CompoLabel';
-//import CompoButtonKeep from '../Button/CompoButtonKeep';
 import CompoTitulo from '../Titulo/CompoTitulo';
 import Button from 'react-bootstrap/Button'
-//import ModalEliminar from '../Eliminar/Eliminar'
-
-//import Row from 'react-bootstrap/Row'
-
 
 export default class Roles extends Component {
   
@@ -91,7 +85,7 @@ export default class Roles extends Component {
                 <input  className="form-control" type="text" value={this.state.descripcion} onChange={this.onChangeRolDescripcion}/>
               </Form.Group>
               </div>
-              <Button variant="dark" type="submit">Guardar</Button>
+              <Button  variant="outline-secondary" type="submit">Guardar</Button>
                {/* <CompoButtonKeep titulo="Consultar"/> */}
             </Form>
           </div>
@@ -99,7 +93,7 @@ export default class Roles extends Component {
 
         {/* Tabla listar roles */}
         <h2 className="py-3">Listado de Roles</h2>
-          <Table striped bordered hover className="card-body">
+          <Table striped bordered hover variant="dark" className="card-body">
             <thead>
               <tr>
                 <th>N°</th>
@@ -117,8 +111,7 @@ export default class Roles extends Component {
                   <td> <Button variant="danger" type="submit" onClick={() => this.eliminarRol(rol.id)}>Eliminar</Button></td>
                 </tr>
               ))}
-            </tbody>
-           
+            </tbody>   
           </Table>
         </Container>
       </div>

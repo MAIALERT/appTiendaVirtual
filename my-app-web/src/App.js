@@ -14,7 +14,7 @@ import Categorias from './Components/Categorias/CompoCategorias';
 import Pedidos from './Components/Pedidos/PedidoProveedores';
 import Productos from './Components/Productos/CompoProductos';
 import Compras from './Components/Compras/pedidoCompras';
-import Eliminar from './Components/Eliminar/ModalEliminar';
+
 
 function App() {
   return (
@@ -29,7 +29,6 @@ function App() {
     <Route path="/PedidoProveedores" component={Pedidos}/>
     <Route path="/Productos" component={Productos}/>
     <Route path="/Compras" component={Compras}/>
-    <Route path="/Eliminar" component={Eliminar}/>
     </Router>
   );
 }

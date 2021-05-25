@@ -5,19 +5,29 @@ import Container from "react-bootstrap/Container";
 import Form from 'react-bootstrap/Form';
 import CompoInput from '../Input/CompoInput';
 import CompoLabel from '../Label/CompoLabel';
-import CompoButtonKeep from '../Button/CompoButtonKeep';
 import CompoTitulo from '../Titulo/CompoTitulo';
+import { Button } from 'react-bootstrap';
 
 export default class CompoPersonas extends Component {
 
     state = {
         personas: [],
+        generos: [],
     };
     async componentDidMount() {
         const res = await axios.get("http://localhost:4000/personas");
         this.setState({ personas: res.data.datos });
         console.log(res);
+        this.listaGenero();
     }
+    //Listado Genero
+    async listaGenero() {
+        const res = await axios.get("http://localhost:4000/generos");
+        this.setState({ generos: res.data.datos });
+        console.log(res);
+    }
+
+
     render() {
         return (
             <div className="py-4">
@@ -46,7 +56,11 @@ export default class CompoPersonas extends Component {
 
                                     <Form.Group className="col-md-6" controlId="formBasicEmail">
                                         <CompoLabel titulo="Genero" />
-                                        <CompoInput />
+                                        <Form.Control as="select" custom>
+                                            {this.state.generos.map((genero) =>(
+                                                <option key={genero.id} value={genero.id}>{genero.nombre}</option>
+                                            ))}
+                                        </Form.Control>
                                     </Form.Group>
                                     <Form.Group className="col-md-6" controlId="formBasicPassword">
                                         <CompoLabel titulo="Fecha Nacimiento" />
@@ -65,7 +79,7 @@ export default class CompoPersonas extends Component {
                                         <CompoInput />
                                     </Form.Group>
                                 </div>
-                                <CompoButtonKeep titulo="Guardar" />
+                                <Button variant="outline-secondary" type="submit">Guardar</Button>
                             </Form>
                         </div>
                     </div>
