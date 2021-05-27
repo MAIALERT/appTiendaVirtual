@@ -3,7 +3,6 @@ import axios from "axios";
 import Table from "react-bootstrap/Table";
 import Container from "react-bootstrap/Container";
 import Form from 'react-bootstrap/Form';
-import CompoInput from '../Input/CompoInput';
 import CompoLabel from '../Label/CompoLabel';
 import CompoTitulo from '../Titulo/CompoTitulo';
 import { Button } from 'react-bootstrap';
@@ -13,19 +12,139 @@ export default class CompoPersonas extends Component {
     state = {
         personas: [],
         generos: [],
+        tipoDocumento: [],
+        nombre: '',
+        apellido: '',
+        tipoDocumentoID: '',
+        numeroDocumento:'',
+        fechaNacimiento: '',
+        generoID: '',
+        correoElectronico: '',
+        telefono: '',
+        direccion: '',
     };
     async componentDidMount() {
+        this.getPersona();
+        this.listaGenero();
+        this.listaTipoDocumento();
+        console.log(this.state.roles);
+    }
+
+     //listado personas
+     getPersona =  async () => {
         const res = await axios.get("http://localhost:4000/personas");
         this.setState({ personas: res.data.datos });
         console.log(res);
-        this.listaGenero();
-    }
+      }
     //Listado Genero
     async listaGenero() {
         const res = await axios.get("http://localhost:4000/generos");
         this.setState({ generos: res.data.datos });
         console.log(res);
     }
+     //Lista tipo documento
+    async listaTipoDocumento() {
+        const res = await axios.get("http://localhost:4000/tipoDocumentos");
+        this.setState({ tipoDocumento: res.data.datos });
+        console.log(res);
+    }
+    
+    
+  onChangeNombre = (e) => {
+    this.setState({
+      nombre: e.target.value,
+      //descripcion: e.target.value,
+    })
+    console.log(e.target.value);
+  }
+  onChangeApellido = (e) => {
+    this.setState({
+        apellido: e.target.value,
+      //descripcion: e.target.value,
+      
+    })
+    console.log(e.target.value);
+  }
+  onChangeTipoDocumento = (e) => {
+    this.setState({
+        tipoDocumentoID: e.target.value,
+      //descripcion: e.target.value,
+      
+    })
+    console.log(e.target.value);
+  }
+  onChangeNumeroDocumento = (e) => {
+    this.setState({
+        numeroDocumento: e.target.value,
+      //descripcion: e.target.value,
+      
+    })
+    
+    console.log(e.target.value);
+  }
+  onChangeFechaNacimiento = (e) => {
+    this.setState({
+        fechaNacimiento: e.target.value,
+      //descripcion: e.target.value,
+      
+    })
+    console.log(e.target.value);
+  }
+ 
+  onChangeGenero = (e) => {
+    this.setState({
+        generoID: e.target.value,
+      //descripcion: e.target.value,
+      
+    })
+    console.log(e.target.value);
+  }
+
+  onChangeCorreoElectronico = (e) => {
+    this.setState({
+        correoElectronico: e.target.value,
+      //descripcion: e.target.value,
+      
+    })
+    console.log(e.target.value);
+  }
+  onChangeTelefono = (e) => {
+    this.setState({
+        telefono: e.target.value,
+      //descripcion: e.target.value,
+      
+    })
+    console.log(e.target.value);
+  }
+  onChangeDireccion = (e) => {
+    this.setState({
+        direccion: e.target.value,
+      //descripcion: e.target.value,
+      
+    })
+    console.log(e.target.value);
+  }
+   
+
+    onSubmit = async e => {
+        e.preventDefault();
+          await axios.post("http://localhost:4000/personas",{
+          nombre: this.state.nombre,
+          apellido: this.state.apellido,
+          tipoDocumentoID: this.state.tipoDocumentoID,
+          numeroDocumento: this.state.numeroDocumento,
+          fechaNacimiento: this.state.fechaNacimiento,
+          generoID: this.state.generoID,
+          correoElectronico: this.state.correoElectronico,
+          telefono: this.state.telefono, 
+          direccion: this.state.direccion,
+        });
+       //console.log(res);
+       //this.setState({nombre: ''});
+       //this.setState({descripcion: ''});
+       this.getPersona();
+    }
+
 
 
     render() {
@@ -35,48 +154,57 @@ export default class CompoPersonas extends Component {
                     <div className="py-1">
                         <div className="card">
                             <CompoTitulo titulo="Registro Persona"></CompoTitulo>
-                            <Form className="py-5 card-body">
+                            <Form className="py-5 card-body" onSubmit={this.onSubmit}>
                                 <div className="form-group row">
                                     <Form.Group className="col-md-6" controlId="formBasicEmail">
                                         <CompoLabel titulo="Nombre" />
-                                        <CompoInput />
+                                        <input  className="form-control" type="text"  value={this.state.nombre} onChange={this.onChangeNombre}/>
                                     </Form.Group>
                                     <Form.Group className="col-md-6" controlId="formBasicPassword">
                                         <CompoLabel titulo="Apellido" />
-                                        <CompoInput />
+                                        <input  className="form-control" type="text"  value={this.state.apellido} onChange={this.onChangeApellido}/>
                                     </Form.Group>
-                                    <Form.Group className="col-md-6" controlId="formBasicEmail">
+                                       <Form.Group className="col-md-6" controlId="formBasicEmail">
                                         <CompoLabel titulo="Tipo Documento" />
-                                        <CompoInput />
+                                        <Form.Control as="select"  onChange={this.onChangeTipoDocumento} custom>
+                                            {this.state.tipoDocumento.map((tipodocumento) =>(
+                                                <option key={tipodocumento.id} value={tipodocumento.id}>{tipodocumento.nombre}</option>
+                                            ))}
+                                        </Form.Control>
+                                    {/* <input  className="form-control" type="text"  value={this.state.tipoDocumentoID} onChange={this.onChangeTipoDocumento}/> */}
+
                                     </Form.Group>
                                     <Form.Group className="col-md-6" controlId="formBasicPassword">
                                         <CompoLabel titulo="N° Documento" />
-                                        <CompoInput />
+                                        <input  className="form-control" type="text"  value={this.state.numeroDocumento} onChange={this.onChangeNumeroDocumento}/>
                                     </Form.Group>
 
                                     <Form.Group className="col-md-6" controlId="formBasicEmail">
                                         <CompoLabel titulo="Genero" />
-                                        <Form.Control as="select" custom>
+                                        {/* <input  className="form-control" type="text"  value={this.state.generoID} onChange={this.onChangeGenero}/> */}
+
+                                        <Form.Control as="select"  onChange={this.onChangeGenero} custom>
                                             {this.state.generos.map((genero) =>(
                                                 <option key={genero.id} value={genero.id}>{genero.nombre}</option>
                                             ))}
                                         </Form.Control>
+                                        
                                     </Form.Group>
                                     <Form.Group className="col-md-6" controlId="formBasicPassword">
                                         <CompoLabel titulo="Fecha Nacimiento" />
-                                        <CompoInput />
+                                        <input  className="form-control" type="text"  value={this.state.fechaNacimiento} onChange={this.onChangeFechaNacimiento}/>
                                     </Form.Group>
                                     <Form.Group className="col-md-6" controlId="formBasicEmail">
                                         <CompoLabel titulo="Correo Electronico" />
-                                        <CompoInput />
+                                        <input  className="form-control" type="text"  value={this.state.correoElectronico} onChange={this.onChangeCorreoElectronico}/>
                                     </Form.Group>
                                     <Form.Group className="col-md-6" controlId="formBasicPassword">
                                         <CompoLabel titulo="Teléfono" />
-                                        <CompoInput />
+                                        <input  className="form-control" type="text"  value={this.state.telefono} onChange={this.onChangeTelefono}/>
                                     </Form.Group>
                                     <Form.Group className="col-md-6" controlId="formBasicEmail">
                                         <CompoLabel titulo="Dirección" />
-                                        <CompoInput />
+                                        <input  className="form-control" type="text"  value={this.state.direccion} onChange={this.onChangeDireccion}/>
                                     </Form.Group>
                                 </div>
                                 <Button variant="outline-secondary" type="submit">Guardar</Button>

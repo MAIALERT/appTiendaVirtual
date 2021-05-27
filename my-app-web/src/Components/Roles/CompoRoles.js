@@ -5,7 +5,7 @@ import Container from "react-bootstrap/Container";
 import Form from 'react-bootstrap/Form';
 import CompoLabel from '../Label/CompoLabel';
 import CompoTitulo from '../Titulo/CompoTitulo';
-import Button from 'react-bootstrap/Button'
+import Button from 'react-bootstrap/Button';
 
 export default class Roles extends Component {
   

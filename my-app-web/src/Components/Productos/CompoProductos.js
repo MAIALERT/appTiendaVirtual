@@ -11,12 +11,22 @@ import CompoTitulo from '../Titulo/CompoTitulo';
 export default class CompoProductos extends Component {
     state = {
         productos: [],
+        categorias: [],
     };
     async componentDidMount() {
         const res = await axios.get("http://localhost:4000/productos");
         this.setState({ productos: res.data.datos });
         console.log(res);
+        this.listaCategoria();
     }
+
+    //lista categoria
+    async listaCategoria() {
+        const res = await axios.get("http://localhost:4000/categorias");
+        this.setState({ categorias: res.data.datos });
+        console.log(res);
+    }
+    
     render() {
         return (
             <div className="py-4">
@@ -36,7 +46,11 @@ export default class CompoProductos extends Component {
                                     </Form.Group>
                                     <Form.Group className="col-md-6" controlId="formBasicEmail">
                                         <CompoLabel titulo="Categoria" />
-                                        <CompoInput />
+                                        <Form.Control as="select" custom>
+                                            {this.state.categorias.map((categoria) => (
+                                                <option key={categoria.id} value={categoria.id}>{categoria.nombre}</option>
+                                            ))}
+                                        </Form.Control>
                                     </Form.Group>
                                     <Form.Group className="col-md-6" controlId="formBasicPassword">
                                         <CompoLabel titulo="Valor Unidad Cliente" />
